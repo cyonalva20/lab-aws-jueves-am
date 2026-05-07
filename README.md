@@ -126,14 +126,20 @@ git merge feature/iac-root
 git branch -d feature/iac-root
 git push origin develop
 
-# AWS
-git checkout -b docs/readme
-git add README.md
-git commit -m "docs: add full project documentation"
+# AWS y Fix
+git checkout -b feat/aws
+git add .gitignore
+git commit -m "chore: añadir gitignore"
+git add .
+git commit -m "fix: actualizacion lambda outputs, observability, dashboard y creaxion del readme"
 git checkout develop
-git merge docs/readme
-git branch -d docs/readme
+git merge feat/aws
+git branch -d feat/aws
 git push origin develop
+
+#
+git checkout develop
+git commit -m "editar readme"
 
 ```
 
