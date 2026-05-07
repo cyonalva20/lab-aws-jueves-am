@@ -1,7 +1,7 @@
 environment     = "prod"
 project_name    = "image-processor"
 aws_region      = "us-east-1"
-sns_alarm_email = "tu-email@gmail.com"
+sns_alarm_email = "cyonalva20@gmail.com"
 
 upload_lambda_memory      = 512
 crop_lambda_memory        = 1024

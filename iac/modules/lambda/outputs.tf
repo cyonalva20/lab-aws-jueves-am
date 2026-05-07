@@ -22,3 +22,8 @@ output "crop_lambda_log_group" {
   description = "Nombre del log group de la crop-lambda"
   value       = aws_cloudwatch_log_group.crop_lambda.name
 }
+
+output "crop_lambda_name" {
+  description = "Nombre de la crop-lambda"
+  value       = aws_lambda_function.crop.function_name
+}

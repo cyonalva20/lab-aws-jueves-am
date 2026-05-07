@@ -112,7 +112,6 @@ resource "aws_cloudwatch_dashboard" "main" {
 
   dashboard_body = jsonencode({
     widgets = [
-      # Invocaciones de la upload-lambda
       {
         type   = "metric"
         x      = 0
@@ -121,15 +120,16 @@ resource "aws_cloudwatch_dashboard" "main" {
         height = 6
         properties = {
           title  = "Upload Lambda — Invocaciones y Errores"
+          region = "us-east-1"
           period = 60
           stat   = "Sum"
+          view   = "timeSeries"
           metrics = [
             ["AWS/Lambda", "Invocations", "FunctionName", var.upload_lambda_name],
             ["AWS/Lambda", "Errors", "FunctionName", var.upload_lambda_name]
           ]
         }
       },
-      # Invocaciones de la crop-lambda
       {
         type   = "metric"
         x      = 12
@@ -138,15 +138,16 @@ resource "aws_cloudwatch_dashboard" "main" {
         height = 6
         properties = {
           title  = "Crop Lambda — Invocaciones y Errores"
+          region = "us-east-1"
           period = 60
           stat   = "Sum"
+          view   = "timeSeries"
           metrics = [
             ["AWS/Lambda", "Invocations", "FunctionName", var.crop_lambda_name],
             ["AWS/Lambda", "Errors", "FunctionName", var.crop_lambda_name]
           ]
         }
       },
-      # Mensajes en la DLQ
       {
         type   = "metric"
         x      = 0
@@ -155,14 +156,15 @@ resource "aws_cloudwatch_dashboard" "main" {
         height = 6
         properties = {
           title  = "DLQ — Mensajes visibles"
+          region = "us-east-1"
           period = 60
           stat   = "Sum"
+          view   = "timeSeries"
           metrics = [
             ["AWS/SQS", "ApproximateNumberOfMessagesVisible", "QueueName", var.dlq_name]
           ]
         }
       },
-      # Latencia del API Gateway
       {
         type   = "metric"
         x      = 12
@@ -171,8 +173,10 @@ resource "aws_cloudwatch_dashboard" "main" {
         height = 6
         properties = {
           title  = "API Gateway — Latencia"
+          region = "us-east-1"
           period = 60
           stat   = "Average"
+          view   = "timeSeries"
           metrics = [
             ["AWS/ApiGateway", "Latency", "ApiId", var.api_id],
             ["AWS/ApiGateway", "IntegrationLatency", "ApiId", var.api_id]
